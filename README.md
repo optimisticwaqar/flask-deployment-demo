@@ -20,6 +20,10 @@ A demonstration of automated Docker deployment with GitHub Actions, environments
 - **Staging**: Auto-deployed on main branch push
 - **Production**: Requires manual approval after staging success
 
+## Docker Repository
+
+- **DockerHub**: [waqar8593/flask-deployment-demo](https://hub.docker.com/r/YOUR_DOCKERHUB_USERNAME/flask-deployment-demo)
+
 ## Manual Deployment
 
 To deploy manually:
@@ -46,5 +50,5 @@ pip install -r requirements.txt
 python app.py
 
 # Run with Docker
-docker build -t deployment-demo .
-docker run -p 8080:5000 deployment-demo
+docker build -t flask-demo .
+docker run -p 8080:5000 flask-demo

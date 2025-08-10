@@ -73,7 +73,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        images: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/flask-deployment-demo
         tags: |
           type=ref,event=branch
           type=ref,event=pr
@@ -101,17 +101,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: staging
-      url: ${{ steps.deploy.outputs.url }}
+      url: ${{ vars.DEPLOY_URL }}
     steps:
     - name: Deploy to Staging
       id: deploy
       run: |
         echo "🚀 Deploying to staging environment..."
         echo "Image: ${{ needs.build.outputs.image-tag }}"
+        echo "Registry: ${{ vars.DOCKER_REGISTRY }}"
         echo "Simulating deployment to staging server..."
         sleep 5
         echo "✅ Deployment to staging completed!"
-        echo "url=https://staging-demo.example.com" >> $GITHUB_OUTPUT
 
     - name: Run staging tests
       run: |
@@ -131,17 +131,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: production
-      url: ${{ steps.deploy.outputs.url }}
+      url: ${{ vars.DEPLOY_URL }}
     steps:
     - name: Deploy to Production
       id: deploy
       run: |
         echo "🚀 Deploying to production environment..."
         echo "Image: ${{ needs.build.outputs.image-tag }}"
+        echo "Registry: ${{ vars.DOCKER_REGISTRY }}"
         echo "Simulating deployment to production server..."
         sleep 10
         echo "✅ Deployment to production completed!"
-        echo "url=https://demo.example.com" >> $GITHUB_OUTPUT
 
     - name: Run production smoke tests
       run: |
