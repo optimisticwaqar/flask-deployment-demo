@@ -70,6 +70,9 @@ def version():
         'build_number': os.getenv('BUILD_NUMBER', 'local'),
         'git_commit': os.getenv('GIT_COMMIT', 'unknown')
     })
+# Add this broken code to test failure
+def broken_function():
+    return undefined_variable  # This will cause an error
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
