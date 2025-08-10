@@ -71,9 +71,11 @@ def version():
         'git_commit': os.getenv('GIT_COMMIT', 'unknown')
     })
 # Add this broken code to test failure
-def broken_function():
-    return undefined_variable  # This will cause an error
+
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
+
+def broken_function():
+    return undefined_variable  # This will cause an error
