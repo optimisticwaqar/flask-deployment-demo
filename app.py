@@ -42,6 +42,9 @@ HTML_TEMPLATE = """
 """
 
 @app.route('/')
+
+# Add this broken code to test failure
+undefined_variable_that_will_fail = some_undefined_variable  # This will cause immediate import error
 def home():
     """Home page with deployment information."""
     return render_template_string(HTML_TEMPLATE,
@@ -77,5 +80,3 @@ if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
 
-def broken_function():
-    return undefined_variable  # This will cause an error
